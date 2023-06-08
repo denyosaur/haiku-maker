@@ -1,10 +1,12 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { sendToChatGPT } from '../../lib/sendToChatGPT';
+import { apiRequests } from '../../lib/apiRequests';
 
-const FormInputs = () => {
+const FormInputs: React.FC = () => {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState(['', '', '']);
   const [topicNum, setTopicNum] = useState(1);
 
@@ -19,31 +21,35 @@ const FormInputs = () => {
     setInputValue(arr);
   };
 
-  const handleSubmit = (evt: React.FormEvent) => {
+  const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
-    sendToChatGPT(inputValue);
+    const sendRequestId = await apiRequests(inputValue);
+    router.push(`./haiku/${sendRequestId}`);
   };
 
   return (
     <div className="flex">
       <form className="flex flex-col items-end h-96" onSubmit={handleSubmit}>
-        {Array.from(Array(topicNum)).map((x: void, index: number) => {
-          return (
-            <label key={index}>
-              <div className="leading-7">
-                {`Enter Topic #${index + 1}`}
-              </div>
-              <input
-                className="border border-slate-300 p-2 rounded-md shadow-sm focus:outline-none focus:border-rose-300 focus:ring-1 focus:ring-rose-300"
-                id={'topic' + index}
-                data-index={index}
-                maxLength={20}
-                onChange={handleInputChange}
-                type="text"
-                value={inputValue[index]}
-              />
-            </label>)
-        })}
+        <div className="min-h-[140px]">
+          {Array.from(Array(topicNum)).map((x: void, index: number) => {
+            return (
+              <label key={index}>
+                <div className="leading-7">
+                  {`Enter Topic #${index + 1}`}
+                </div>
+                <input
+                  className="border border-slate-300 p-2 rounded-md shadow-sm focus:outline-none focus:border-rose-300 focus:ring-1 focus:ring-rose-300"
+                  id={'topic' + index}
+                  data-index={index}
+                  maxLength={21}
+                  onChange={handleInputChange}
+                  type="text"
+                  value={inputValue[index]}
+                />
+              </label>)
+          })}
+        </div>
+
         {topicNum === 3 ?
           <></> :
           <div

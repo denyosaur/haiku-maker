@@ -1,6 +1,8 @@
+'use client'
+
 import FormInputs from '../FormInputs';
 
-const Home = () => {
+const Home: React.FC = () => {
 
   return (
     <div className="">
