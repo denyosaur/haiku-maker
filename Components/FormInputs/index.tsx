@@ -29,7 +29,7 @@ const FormInputs: React.FC<FormInputsProps> = ({ setFadeOut }) => {
   };
 
   return (
-    <div className="flex h-full">
+    <div className="flex">
       <form className="flex flex-col items-end h-96" onSubmit={handleSubmit}>
         <div className="min-h-[140px]">
           {Array.from(Array(topicNum)).map((x: void, index: number) => {
@@ -42,7 +42,7 @@ const FormInputs: React.FC<FormInputsProps> = ({ setFadeOut }) => {
                   className="border border-slate-300 p-2 rounded-md shadow-sm focus:outline-none focus:border-rose-300 focus:ring-1 focus:ring-rose-300"
                   id={'topic' + index}
                   data-index={index}
-                  maxLength={21}
+                  maxLength={20}
                   onChange={handleInputChange}
                   type="text"
                   value={inputValue[index]}
