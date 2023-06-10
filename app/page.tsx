@@ -1,19 +1,16 @@
-import Image from 'next/image'
+import { client } from '../client';
+import { groq } from "next-sanity";
 
-import Background from '../Components/Background';
-import HaikuHeader from '../Components/HaikuHeader';
-import HomePage from '../Components/HomePage';
+import HomeComponent from '../Components/HomeComponent';
 
-export default function Home() {
+export default async function Home() {
+  const haikuQuery = groq`*[_type == 'haiku' && id == 000000]{haiku}`;
+  const res = await client.fetch(haikuQuery);
+  const { haiku } = res[0];
+
   return (
     <main className="flex flex-col justify-between h-screen w-screen p-10">
-      <div className="flex justify-end relative h-full w-full rounded-3xl">
-        <div className="flex flex-col justify-around items-center h-full w-[60vw] bg-rose-50 right-0 rounded-r-3xl">
-          <HaikuHeader />
-          <HomePage />
-        </div>
-        <Background />
-      </div>
-    </main>
+      <HomeComponent haiku={haiku} />
+    </main >
   )
 }

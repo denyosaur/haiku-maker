@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { apiRequests } from '../../lib/apiRequests';
 
-const FormInputs: React.FC = () => {
+const FormInputs: React.FC<FormInputsProps> = ({ setFadeOut }) => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState(['', '', '']);
   const [topicNum, setTopicNum] = useState(1);
@@ -23,12 +23,13 @@ const FormInputs: React.FC = () => {
 
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
+    setFadeOut(true);
     const sendRequestId = await apiRequests(inputValue);
     router.push(`./haiku/${sendRequestId}`);
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <form className="flex flex-col items-end h-96" onSubmit={handleSubmit}>
         <div className="min-h-[140px]">
           {Array.from(Array(topicNum)).map((x: void, index: number) => {
@@ -69,3 +70,7 @@ const FormInputs: React.FC = () => {
 }
 
 export default FormInputs;
+
+interface FormInputsProps {
+  setFadeOut: (fadeOut: boolean) => void;
+}
