@@ -11,7 +11,7 @@ const HomeComponent: React.FC<HomeComponent> = ({ haiku }) => {
 
   return (
     <Frame>
-      <div className={fadeOut ? "h-full transition-opacity ease-out duration-700 opacity-0" : "h-full opacity-100"}>
+      <div className={fadeOut ? "h-full transition-opacity ease-out duration-700 opacity-0" : "h-full opacity-100 w-full"}>
         <HaikuHeader haiku={haiku} />
         <FormInputs setFadeOut={setFadeOut} />
       </div>

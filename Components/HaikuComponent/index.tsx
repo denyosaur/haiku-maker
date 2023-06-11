@@ -16,7 +16,7 @@ const HaikuComponent: React.FC<Haiku> = ({ haiku, isHeader = false }) => {
         className={baseCss}
       >
         {separateLines.map((line, index) => {
-          return <p key={`line-${index + 1}`}>{line}</p>
+          return <p className="text-center" key={`line-${index + 1}`}>{line}</p>
         })}
       </div>
     )
@@ -26,7 +26,7 @@ const HaikuComponent: React.FC<Haiku> = ({ haiku, isHeader = false }) => {
       className={isLoaded ? `${baseCss} transition-opacity ease-out duration-700 opacity 100` : `${baseCss} opacity-0`}
     >
       {separateLines.map((line, index) => {
-        return <p key={`line-${index + 1}`}>{line}</p>
+        return <p className="text-center" key={`line-${index + 1}`}>{line}</p>
       })}
     </div>
   )

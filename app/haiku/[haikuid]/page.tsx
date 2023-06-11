@@ -12,7 +12,7 @@ const HaikuPage = async ({ params }: any) => {
   const { haiku } = await fetchHaiku(haikuIdToUse);
 
   return (
-    <main className="flex flex-col h-screen w-screen p-10">
+    <main className="flex flex-col h-screen w-screen p-4 sm:p-10">
       <Frame>
         <div className="flex flex-col justify-start items-start h-full w-full">
           <Link
