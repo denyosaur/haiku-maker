@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { apiRequests } from '../../lib/apiRequests';
+import { apiRequests } from '../../api/apiRequests';
 
 const FormInputs: React.FC<FormInputsProps> = ({ setFadeOut }) => {
   const router = useRouter();

@@ -1,5 +1,5 @@
 import { sendToChatGPT } from './sendToChatGPT';
-import { createId } from './createId';
+import { createId } from '../lib/createId';
 import { writeToSanity } from './writeToSanity';
 
 export const apiRequests = async (topics: string[]) => {
