@@ -25,6 +25,7 @@ export const sendToChatGPT = async (topics: string[]) => {
       return reply;
     }
   } catch (err) {
-    console.error('Error:', err);
+    sendToChatGPT(topics);
+    throw err;
   }
 };

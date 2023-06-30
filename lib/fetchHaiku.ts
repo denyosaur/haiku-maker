@@ -4,5 +4,6 @@ export const fetchHaiku = async (id: number) => {
   const res = await fetch(sanityUrl)
 
   const data = await res.json();
+
   return data.result[0];
 }

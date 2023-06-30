@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { apiRequests } from '../../api/apiRequests';
-
 const FormInputs: React.FC<FormInputsProps> = ({ setFadeOut }) => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState(['', '', '']);
@@ -24,8 +22,15 @@ const FormInputs: React.FC<FormInputsProps> = ({ setFadeOut }) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
     setFadeOut(true);
-    const sendRequestId = await apiRequests(inputValue);
-    router.push(`./haiku/${sendRequestId}`);
+    const stringifiedTopics = { topics: inputValue };
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/haiku-generate`, {
+      method: 'POST',
+      body: JSON.stringify(stringifiedTopics),
+    });
+    const resJson = await res.json();
+
+    router.push(`./haiku/${resJson.data}`);
   };
 
   return (

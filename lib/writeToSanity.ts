@@ -12,13 +12,13 @@ export const client = createClient({
 
 export const writeToSanity = async (haiku: HaikuPost) => {
   try {
-
     const result = client.create(haiku).then(res => {
       return res.id
     });
     return result;
   } catch (err) {
-    console.error('Error:', err);
+    writeToSanity(haiku);
+    throw err;
   }
 };
 
