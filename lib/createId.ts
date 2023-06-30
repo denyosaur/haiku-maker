@@ -6,8 +6,6 @@ export const createId = () => {
 };
 
 function hashCode(date: string) {
-  let hash = 0;
-  for (let i = 0, hash = 0; i < date.length; i++)
-    hash = Math.abs(Math.imul(31, hash) + date.charCodeAt(i) | 0);
+  for (var i = 0, hash = 0; i < date.length; i++)hash = Math.abs(Math.imul(31, hash) + date.charCodeAt(i) | 0);
   return hash;
 };
